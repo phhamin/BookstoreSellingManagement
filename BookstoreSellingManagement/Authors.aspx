@@ -139,7 +139,6 @@
 <asp:Content ID="ctJsAuthor" ContentPlaceHolderID="phJs" runat="server">
     <!-- Table Editable plugin -->
     <script src="assets/libs/table-edits/build/table-edits.min.js"></script>
-
     <script src="assets/js/pages/table-editable.int.js"></script> 
 </asp:Content>
 

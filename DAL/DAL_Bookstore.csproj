@@ -47,15 +47,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TblAuthor.cs" />
+    <Compile Include="TblAuthorController.cs" />
+    <Compile Include="TblBook.cs" />
+    <Compile Include="TblBookAuthorLinked.cs" />
+    <Compile Include="TblBookAuthorLinkedController.cs" />
+    <Compile Include="TblBookCategoryLinked.cs" />
+    <Compile Include="TblBookCategoryLinkedController.cs" />
+    <Compile Include="TblBookController.cs" />
+    <Compile Include="TblBookPricing.cs" />
+    <Compile Include="TblBookPricingController.cs" />
+    <Compile Include="TblCategory.cs" />
+    <Compile Include="TblCategoryController.cs" />
+    <Compile Include="TblCustomer.cs" />
+    <Compile Include="TblCustomerController.cs" />
+    <Compile Include="TblOrder.cs" />
+    <Compile Include="TblOrderController.cs" />
+    <Compile Include="TblOrderDetail.cs" />
+    <Compile Include="TblOrderDetailController.cs" />
+    <Compile Include="TblPermission.cs" />
+    <Compile Include="TblPermissionController.cs" />
+    <Compile Include="TblPublisher.cs" />
+    <Compile Include="TblPublisherController.cs" />
+    <Compile Include="TblUser.cs" />
+    <Compile Include="TblUserController.cs" />
+    <Compile Include="TblUserPermissionsLinked.cs" />
+    <Compile Include="TblUserPermissionsLinkedController.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DTO\DTO_Bookstore.csproj">
-      <Project>{69d3df95-ac4f-4be5-8727-1d84d78e5a5a}</Project>
-      <Name>DTO_Bookstore</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

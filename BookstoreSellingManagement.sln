@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL_Bookstore", "BLL\BLL_Bo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL_Bookstore", "DAL\DAL_Bookstore.csproj", "{4D4580A8-EFBA-486C-9587-6D8DEE72E5CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO_Bookstore", "DTO\DTO_Bookstore.csproj", "{69D3DF95-AC4F-4BE5-8727-1D84D78E5A5A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{4D4580A8-EFBA-486C-9587-6D8DEE72E5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D4580A8-EFBA-486C-9587-6D8DEE72E5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4580A8-EFBA-486C-9587-6D8DEE72E5CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69D3DF95-AC4F-4BE5-8727-1D84D78E5A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69D3DF95-AC4F-4BE5-8727-1D84D78E5A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69D3DF95-AC4F-4BE5-8727-1D84D78E5A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69D3DF95-AC4F-4BE5-8727-1D84D78E5A5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
