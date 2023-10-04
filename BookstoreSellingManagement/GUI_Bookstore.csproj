@@ -128,6 +128,7 @@
     <Content Include="Authors.aspx" />
     <Content Include="Books.aspx" />
     <Content Include="Category.aspx" />
+    <Content Include="CategoryDetail.aspx" />
     <Content Include="cms\admin\assets\css\admin.style.css" />
     <Content Include="cms\admin\assets\css\app.min.css" />
     <Content Include="cms\admin\assets\css\bootstrap.min.css" />
@@ -541,6 +542,13 @@
     <Compile Include="Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CategoryDetail.aspx.cs">
+      <DependentUpon>CategoryDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CategoryDetail.aspx.designer.cs">
+      <DependentUpon>CategoryDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CustomerDetail.aspx.cs">
       <DependentUpon>CustomerDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -638,6 +646,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="cms\display\" />
   </ItemGroup>
