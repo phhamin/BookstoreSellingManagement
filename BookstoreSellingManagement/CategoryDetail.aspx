@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="CategoryDetail.aspx.cs" Inherits="BookstoreSellingManagement.CategoryDetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="phCss" runat="server">
-    <link href="cms/admin/assets/css/admin.style.css" rel="stylesheet" />
+     <link href="cms/admin/assets/css/admin.style.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="phMain" runat="server">
     <!-- Start right Content here -->
@@ -23,18 +23,18 @@
                             <div class="card-body p-4">
                                     <div class="row">
                                         <div class="col-lg-3 mb-12">
-                                        <div class="mb-3">
-                                            <label for="categoryImage-input" class="form-label">Category Image</label>                                                                            
-                                        </div>
-                                        <div class="mb-3">
-                                            <div class="categoryImage-container">
-                                                <asp:Image ID="imgCategoryImage" runat="server" class="categoryImage-preview" Visible="false"/>
+                                            <div class="mb-3">
+                                                <label for="categoryImage-input" class="form-label">Category Image</label>                                                                            
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="avatar-container">
+                                                    <asp:Image ID="imgCategoryImage" runat="server" class="avatar-preview" Visible="false"/>
+                                                </div>
+                                            </div>
+                                                <div class="mb-3">
+                                                <asp:FileUpload ID="fileCategoryImage"  runat="server" />                                              
                                             </div>
                                         </div>
-                                            <div class="mb-3">
-                                            <asp:FileUpload ID="fileCategoryImage"  runat="server" />                                              
-                                        </div>
-                                    </div>
                                         <div class="col-lg-9">      
                                             <asp:UpdatePanel ID="panel" runat="server">
                                                 <ContentTemplate>

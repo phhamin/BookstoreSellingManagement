@@ -2,6 +2,7 @@
 using Bookstore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -69,6 +70,19 @@ namespace BookstoreSellingManagement
                 {
                     // Cập nhật thông tin 
                     categoryToUpdate.CategoryName = txtCategoryName.Text;
+                    if (fileCategoryImage.HasFile)
+                    {
+                        string fileName = Path.GetFileName(fileCategoryImage.PostedFile.FileName);
+
+                        string uploadPath = Server.MapPath("~/img/"); // Đường dẫn lưu file
+
+                        // Lưu file vào thư mục Uploads
+                        fileCategoryImage.PostedFile.SaveAs(Path.Combine(uploadPath, fileName));
+
+                        // Lưu tên file vào trường CategoryImage trong CSDL                  
+                        categoryToUpdate.CategoryImage = "img/" + fileName;
+                    }
+
                     // Gọi phương thức UpdateCategory để cập nhật vào cơ sở dữ liệu
                     TblCategory updatedCategory = CategoryManager.UpdateCategory(categoryToUpdate);
 
@@ -99,7 +113,19 @@ namespace BookstoreSellingManagement
                 {
                     CategoryName = txtCategoryName.Text,
                 };
+                if (fileCategoryImage.HasFile)
+                {
+                    string fileName = Path.GetFileName(fileCategoryImage.PostedFile.FileName);
 
+                    string uploadPath = Server.MapPath("~/img/"); // Đường dẫn lưu file
+
+                    // Lưu file vào thư mục Uploads
+                    fileCategoryImage.PostedFile.SaveAs(Path.Combine(uploadPath, fileName));
+
+                    // Lưu tên file vào trường CategoryImage trong CSDL
+                    newCategory.CategoryImage = "img/" + fileName;
+
+                }
                 // Gọi phương thức BLL để thêm người dùng mới
                 TblCategory insertedCategory = CategoryManager.InsertCategory(newCategory);
 
@@ -140,6 +166,11 @@ namespace BookstoreSellingManagement
             TblCategory category = GetCategoryInfoFromDatabase(categoryId);
 
             txtCategoryName.Text = category.CategoryName;
+            if (!string.IsNullOrEmpty(category.CategoryImage))
+            {
+                imgCategoryImage.ImageUrl = category.CategoryImage;
+                imgCategoryImage.Visible = true;
+            }
         }
 
 
