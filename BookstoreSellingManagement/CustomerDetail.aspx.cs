@@ -2,7 +2,6 @@
 using Bookstore;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -11,38 +10,38 @@ using System.Web.UI.WebControls;
 
 namespace BookstoreSellingManagement
 {
-    public partial class UserDetail : System.Web.UI.Page
+    public partial class CustomerDetail : System.Web.UI.Page
     {
-        private TblUser GetUserInfoFromDatabase(Guid userId)
+        private TblCustomer GetCustomerInfoFromDatabase(Guid customerId)
         {
-            // Gọi phương thức BLL để lấy thông tin người dùng dựa vào userId
-            TblUser user = UsersManager.GetUserById(userId);
+            // Gọi phương thức BLL để lấy thông tin người dùng dựa vào customerId
+            TblCustomer customer = CustomersManager.GetCustomerById(customerId);
 
-            return user;
+            return customer;
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["userId"] != null)
+                if (Request.QueryString["customerId"] != null)
                 {
-                    if (Guid.TryParse(Request.QueryString["userId"], out Guid userId))
+                    if (Guid.TryParse(Request.QueryString["customerId"], out Guid customerId))
                     {
-                        LoadData(userId);
+                        LoadData(customerId);
                     }
                     else
                     {
-                        // Xử lý khi không có userId (trang thêm mới)
+                        // Xử lý khi không có customerId (trang thêm mới)
 
                     }
                 }
             }
         }
-       
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             //Xử lý khi người dùng bỏ trống
-            if(txtUserName.Text == string.Empty)
+            if (txtUserName.Text == string.Empty)
             {
                 iValidUserName.Visible = true;
                 txtUserName.Focus();
@@ -50,7 +49,7 @@ namespace BookstoreSellingManagement
             }
 
             //User Name trùng 
-            if(Request.QueryString["userId"] == null)
+            if (Request.QueryString["customerId"] == null)
             {
                 if (IsUserNameExists(txtUserName.Text))
                 {
@@ -60,14 +59,14 @@ namespace BookstoreSellingManagement
                     txtUserName.Focus();
                     return;
                 }
-            }    
-          
+            }
+
 
             //Ràng buộc cho mật khẩu
-            if (Request.QueryString["userId"] == null)
+            if (Request.QueryString["customerId"] == null)
             {
                 //Không được chừa trống
-                if (txtPassword.Text == string.Empty) 
+                if (txtPassword.Text == string.Empty)
                 {
                     iValidPassword.Visible = true;
                     txtPassword.Focus();
@@ -91,48 +90,42 @@ namespace BookstoreSellingManagement
                     return;
                 }
             }
-            
-            //Ngăn không cho bỏ trống
-            if (txtFirstName.Text == string.Empty)
+
+            //Ngăn không cho bỏ trống      
+            if (txtFullName.Text == string.Empty)
             {
-                iValidFirstName.Visible = true;
-                txtFirstName.Focus();
+                iValidFullName.Visible = true;
+                txtFullName.Focus();
                 return;
             }
-            if(txtLastName.Text == string.Empty)
-            {
-                iValidLastName.Visible = true;
-                txtLastName.Focus();
-                return;
-            }    
-            if(txtEmail.Text == string.Empty)
+            if (txtEmail.Text == string.Empty)
             {
                 iValidEmail.Visible = true;
                 txtEmail.Focus();
                 return;
-            }    
-            if(txtAddress.Text == string.Empty)
+            }
+            if (txtAddress.Text == string.Empty)
             {
                 iValidAddress.Visible = true;
                 txtAddress.Focus();
                 return;
-            }    
-            if(txtPhone.Text == string.Empty)
+            }
+            if (txtPhone.Text == string.Empty)
             {
                 iValidPhone.Visible = true;
                 txtPhone.Focus();
                 return;
-            } 
-             
-            //Xử lý Update khi người dùng chọn Edit
-            if (Guid.TryParse(Request.QueryString["userId"], out Guid userId))
-            {
-                TblUser userToUpdate = UsersManager.GetUserById(userId);
+            }
 
-                if (userToUpdate != null)
+            //Xử lý Update khi người dùng chọn Edit
+            if (Guid.TryParse(Request.QueryString["customerId"], out Guid customerId))
+            {
+                TblCustomer customerToUpdate = CustomersManager.GetCustomerById(customerId);
+
+                if (customerToUpdate != null)
                 {
                     // Cập nhật thông tin người dùng
-                    userToUpdate.UserPassword = txtPassword.Text;
+                    customerToUpdate.CustomerPassword = txtPassword.Text;
 
                     if (fileAvatar.HasFile)
                     {
@@ -144,40 +137,39 @@ namespace BookstoreSellingManagement
                         fileAvatar.PostedFile.SaveAs(Path.Combine(uploadPath, fileName));
 
                         // Lưu tên file vào trường Avatar trong CSDL                  
-                        userToUpdate.Avatar = "img/" + fileName;
+                        customerToUpdate.Avatar = "img/" + fileName;
                     }
 
-                    userToUpdate.FirstName = txtFirstName.Text;
-                    userToUpdate.LastName = txtLastName.Text;
-                    userToUpdate.Sex = drdSex.SelectedValue == "Male" ? true : false;
+                    customerToUpdate.FullName = txtFullName.Text;
+                    customerToUpdate.Sex = drdSex.SelectedValue == "Male" ? true : false;
 
                     if (DateTime.TryParse(txtBirthday.Text, out DateTime birthday))
                     {
-                        userToUpdate.Birthday = birthday;
+                        customerToUpdate.Birthday = birthday;
                     }
                     else
                     {
                         // Xử lý lỗi khi ngày sinh không hợp lệ
                     }
 
-                    userToUpdate.Email = txtEmail.Text;
-                    userToUpdate.UserAddress = txtAddress.Text;
-                    userToUpdate.Phone = txtPhone.Text;
+                    customerToUpdate.Email = txtEmail.Text;
+                    customerToUpdate.CustomerAddress = txtAddress.Text;
+                    customerToUpdate.Phone = txtPhone.Text;
                     // Đặt giá trị UpdatedDate bằng ngày hiện tại
-                    userToUpdate.UpdatedDate = DateTime.Now;
+                    customerToUpdate.UpdatedDate = DateTime.Now;
 
-                    // Gọi phương thức UpdateUser để cập nhật vào cơ sở dữ liệu
-                    TblUser updatedUser = UsersManager.UpdateUser(userToUpdate);
+                    // Gọi phương thức UpdateCustomer để cập nhật vào cơ sở dữ liệu
+                    TblCustomer updatedCustomer = CustomersManager.UpdateCustomer(customerToUpdate);
 
-                    if (updatedUser != null)
+                    if (updatedCustomer != null)
                     {
                         // Người dùng đã được cập nhật thành công
                         // Hiển thị pop-up thông báo thành công
                         iValidUserName.Visible = false;
                         iValidPassword.Visible = false;
-                        LoadData(userId);
+                        LoadData(customerId);
                         liveToastUpdate.Attributes["class"] = "toast show";
-                        //Response.Redirect("UserDetail.aspx");
+                        //Response.Redirect("CustomerDetail.aspx");
                     }
                     else
                     {
@@ -191,18 +183,18 @@ namespace BookstoreSellingManagement
             }
             else
             {
-                //Không có userId
+                //Không có customerId
                 //Xử lý Create khi người dùng thêm mới
-                TblUser newUser = new TblUser
+                TblCustomer newCustomer = new TblCustomer
                 {
+                    Code = Guid.NewGuid(),
                     UserName = txtUserName.Text,
-                    UserPassword = txtPassword.Text,
-                    FirstName = txtFirstName.Text,
-                    LastName = txtLastName.Text,
+                    CustomerPassword = txtPassword.Text,
+                    FullName = txtFullName.Text,
                     Sex = drdSex.SelectedValue == "Male" ? true : false, // Chỉnh sửa giá trị này dựa trên giới tính
-                    
+
                     Email = txtEmail.Text,
-                    UserAddress = txtAddress.Text,
+                    CustomerAddress = txtAddress.Text,
                     Phone = txtPhone.Text,
                     // Đặt giá trị CreatedDate bằng ngày hiện tại
                     CreatedDate = DateTime.Now,
@@ -213,12 +205,12 @@ namespace BookstoreSellingManagement
                 // Thêm xử lý cho trường "Birthday"
                 if (DateTime.TryParse(txtBirthday.Text, out DateTime birthday))
                 {
-                    newUser.Birthday = birthday;
+                    newCustomer.Birthday = birthday;
                 }
                 else
                 {
                     // Xử lý lỗi khi ngày sinh không hợp lệ
-                 
+
                     return;
                 }
                 if (fileAvatar.HasFile)
@@ -231,32 +223,32 @@ namespace BookstoreSellingManagement
                     fileAvatar.PostedFile.SaveAs(Path.Combine(uploadPath, fileName));
 
                     // Lưu tên file vào trường Avatar trong CSDL
-                    newUser.Avatar = "img/" + fileName;
+                    newCustomer.Avatar = "img/" + fileName;
 
                 }
                 // Gọi phương thức BLL để thêm người dùng mới
-                TblUser insertedUser = UsersManager.InsertUser(newUser);
+                TblCustomer insertedCustomer = CustomersManager.InsertCustomer(newCustomer);
 
-                if (insertedUser != null)
+                if (insertedCustomer != null)
                 {
-                    // Lưu userId vào session
-                    Session["NewUserId"] = insertedUser.Id;
+                    // Lưu customerId vào session
+                    Session["NewCustomerId"] = insertedCustomer.Id;
 
-                    
+
                     iValidUserName.Visible = false;
                     iValidPassword.Visible = false;
-                    
+
                     // Chuyển hướng
-                    LoadData(insertedUser.Id);
-                    //Response.Redirect("UserDetail.aspx?userId=" + insertedUser.Id);
+                    LoadData(insertedCustomer.Id);
+                    //Response.Redirect("CustomerDetail.aspx?customerId=" + insertedCustomer.Id);
 
                     // Hiển thị pop-up thông báo thành công
                     liveToastCreate.Attributes["class"] = "toast show";
-                    string script = "setTimeout(function() { window.location.href = 'UserDetail.aspx?userId=" + insertedUser.Id + "'; }, 2000);";
+                    string script = "setTimeout(function() { window.location.href = 'CustomerDetail.aspx?customerId=" + insertedCustomer.Id + "'; }, 2000);";
                     ClientScript.RegisterStartupScript(this.GetType(), "RedirectScript", script, true);
                     //if (Request.QueryString["Id"] != null)
                     //{
-                    //    Response.Redirect("UserDetail.aspx?Id=" + insertedUser.Id);
+                    //    Response.Redirect("CustomerDetail.aspx?Id=" + insertedCustomer.Id);
                     //}
 
                 }
@@ -266,45 +258,44 @@ namespace BookstoreSellingManagement
                 }
             }
 
-            
+
         }
 
 
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Users.aspx");
+            Response.Redirect("Customers.aspx");
         }
-        public void LoadData(Guid userId)
+        public void LoadData(Guid customerId)
         {
-            TblUser user = GetUserInfoFromDatabase(userId);
+            TblCustomer customer = GetCustomerInfoFromDatabase(customerId);
 
-            txtUserName.Text = user.UserName;
+            txtUserName.Text = customer.UserName;
             txtUserName.ReadOnly = true;
 
-            if (!string.IsNullOrEmpty(user.Avatar))
+            if (!string.IsNullOrEmpty(customer.Avatar))
             {
-                imgAvatar.ImageUrl = user.Avatar;
+                imgAvatar.ImageUrl = customer.Avatar;
                 imgAvatar.Visible = true;
             }
 
-            txtFirstName.Text = user.FirstName;
-            txtLastName.Text = user.LastName;
-            if (user.Sex == true)
+            txtFullName.Text = customer.FullName;
+            if (customer.Sex == true)
             {
                 drdSex.SelectedIndex = drdSex.Items.IndexOf(drdSex.Items.FindByValue("Male"));
             }
-            else if (user.Sex == false)
+            else if (customer.Sex == false)
             {
                 drdSex.SelectedIndex = drdSex.Items.IndexOf(drdSex.Items.FindByValue("Female"));
             }
 
-            txtBirthday.Text = user.Birthday.ToString("dd-MM-yyyy");
+            txtBirthday.Text = customer.Birthday.ToString("dd-MM-yyyy");
             txtBirthday.TextMode = TextBoxMode.Date;
-            txtEmail.Text = user.Email;
-            txtAddress.Text = user.UserAddress;
-            txtPhone.Text = user.Phone;
-            
+            txtEmail.Text = customer.Email;
+            txtAddress.Text = customer.CustomerAddress;
+            txtPhone.Text = customer.Phone;
+
         }
 
 
@@ -334,10 +325,7 @@ namespace BookstoreSellingManagement
 
         private bool IsUserNameExists(string userName)
         {
-            return UsersManager.IsUserNameExists(userName);
+            return CustomersManager.IsUserNameExists(userName);
         }
-
-
-
     }
 }

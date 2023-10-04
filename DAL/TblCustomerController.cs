@@ -80,93 +80,20 @@ namespace Bookstore
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(Guid Id,Guid? Code,string FullName,string Email,string CustomerAddress,string Phone,bool Sex,DateTime Birthday,string UserName,string CustomerPassword,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate)
+	    public TblCustomer Insert (TblCustomer item)
 	    {
-		    TblCustomer item = new TblCustomer();
-		    
-            item.Id = Id;
-            
-            item.Code = Code;
-            
-            item.FullName = FullName;
-            
-            item.Email = Email;
-            
-            item.CustomerAddress = CustomerAddress;
-            
-            item.Phone = Phone;
-            
-            item.Sex = Sex;
-            
-            item.Birthday = Birthday;
-            
-            item.UserName = UserName;
-            
-            item.CustomerPassword = CustomerPassword;
-            
-            item.IsActived = IsActived;
-            
-            item.IsDeleted = IsDeleted;
-            
-            item.Avatar = Avatar;
-            
-            item.CreatedUser = CreatedUser;
-            
-            item.CreatedDate = CreatedDate;
-            
-            item.UpdatedUser = UpdatedUser;
-            
-            item.UpdatedDate = UpdatedDate;
-            
-	    
 		    item.Save(UserName);
+			return item;
 	    }
     	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(Guid Id,Guid? Code,string FullName,string Email,string CustomerAddress,string Phone,bool Sex,DateTime Birthday,string UserName,string CustomerPassword,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate)
+	    public TblCustomer Update(TblCustomer item)
 	    {
-		    TblCustomer item = new TblCustomer();
-	        item.MarkOld();
-	        item.IsLoaded = true;
-		    
-			item.Id = Id;
-				
-			item.Code = Code;
-				
-			item.FullName = FullName;
-				
-			item.Email = Email;
-				
-			item.CustomerAddress = CustomerAddress;
-				
-			item.Phone = Phone;
-				
-			item.Sex = Sex;
-				
-			item.Birthday = Birthday;
-				
-			item.UserName = UserName;
-				
-			item.CustomerPassword = CustomerPassword;
-				
-			item.IsActived = IsActived;
-				
-			item.IsDeleted = IsDeleted;
-				
-			item.Avatar = Avatar;
-				
-			item.CreatedUser = CreatedUser;
-				
-			item.CreatedDate = CreatedDate;
-				
-			item.UpdatedUser = UpdatedUser;
-				
-			item.UpdatedDate = UpdatedDate;
-				
 	        item.Save(UserName);
+            return item;
 	    }
     }
 }

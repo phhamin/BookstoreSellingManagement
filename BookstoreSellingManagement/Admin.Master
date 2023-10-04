@@ -202,9 +202,9 @@
                             </li>
 
                             <li>
-                                <a href="Publisher.aspx">
-                                    <i data-feather="publisher"></i>
-                                    <span data-key="t-publisher">Publisher</span>
+                                <a href="Publishers.aspx">
+                                    <i data-feather="publishers"></i>
+                                    <span data-key="t-publishers">Publishers</span>
                                 </a>
                             </li>
 

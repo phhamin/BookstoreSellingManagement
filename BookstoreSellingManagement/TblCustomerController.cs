@@ -80,7 +80,7 @@ namespace Bookstore
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(Guid Id,Guid? Code,string FullName,string Email,string CustomerAddress,string Phone,bool Sex,DateTime Birthday,string UserName,string CustomerPassword,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate)
+	    public void Insert(Guid Id,Guid? Code,string FullName,string Email,string Phone,bool Sex,DateTime Birthday,string UserName,string CustomerPassword,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate,string CustomerAddress)
 	    {
 		    TblCustomer item = new TblCustomer();
 		    
@@ -91,8 +91,6 @@ namespace Bookstore
             item.FullName = FullName;
             
             item.Email = Email;
-            
-            item.CustomerAddress = CustomerAddress;
             
             item.Phone = Phone;
             
@@ -118,6 +116,8 @@ namespace Bookstore
             
             item.UpdatedDate = UpdatedDate;
             
+            item.CustomerAddress = CustomerAddress;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -126,7 +126,7 @@ namespace Bookstore
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(Guid Id,Guid? Code,string FullName,string Email,string CustomerAddress,string Phone,bool Sex,DateTime Birthday,string UserName,string CustomerPassword,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate)
+	    public void Update(Guid Id,Guid? Code,string FullName,string Email,string Phone,bool Sex,DateTime Birthday,string UserName,string CustomerPassword,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate,string CustomerAddress)
 	    {
 		    TblCustomer item = new TblCustomer();
 	        item.MarkOld();
@@ -139,8 +139,6 @@ namespace Bookstore
 			item.FullName = FullName;
 				
 			item.Email = Email;
-				
-			item.CustomerAddress = CustomerAddress;
 				
 			item.Phone = Phone;
 				
@@ -165,6 +163,8 @@ namespace Bookstore
 			item.UpdatedUser = UpdatedUser;
 				
 			item.UpdatedDate = UpdatedDate;
+				
+			item.CustomerAddress = CustomerAddress;
 				
 	        item.Save(UserName);
 	    }

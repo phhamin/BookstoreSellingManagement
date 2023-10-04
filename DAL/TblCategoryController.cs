@@ -22,23 +22,23 @@ namespace Bookstore
     {
         // Preload our schema..
         TblCategory thisSchemaLoad = new TblCategory();
-        private string userName = String.Empty;
-        protected string UserName
+        private string categoryName = String.Empty;
+        protected string CategoryName
         {
             get
             {
-				if (userName.Length == 0) 
+				if (categoryName.Length == 0) 
 				{
     				if (System.Web.HttpContext.Current != null)
     				{
-						userName=System.Web.HttpContext.Current.User.Identity.Name;
+						categoryName=System.Web.HttpContext.Current.User.Identity.Name;
 					}
 					else
 					{
-						userName=System.Threading.Thread.CurrentPrincipal.Identity.Name;
+						categoryName=System.Threading.Thread.CurrentPrincipal.Identity.Name;
 					}
 				}
-				return userName;
+				return categoryName;
             }
         }
         [DataObjectMethod(DataObjectMethodType.Select, true)]
@@ -80,37 +80,20 @@ namespace Bookstore
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(Guid Id,string CategoryName,string CategoryImage)
+	    public TblCategory Insert(TblCategory item)
 	    {
-		    TblCategory item = new TblCategory();
-		    
-            item.Id = Id;
-            
-            item.CategoryName = CategoryName;
-            
-            item.CategoryImage = CategoryImage;
-            
-	    
-		    item.Save(UserName);
+		    item.Save(CategoryName);
+            return item;
 	    }
     	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(Guid Id,string CategoryName,string CategoryImage)
+	    public TblCategory Update(TblCategory item)
 	    {
-		    TblCategory item = new TblCategory();
-	        item.MarkOld();
-	        item.IsLoaded = true;
-		    
-			item.Id = Id;
-				
-			item.CategoryName = CategoryName;
-				
-			item.CategoryImage = CategoryImage;
-				
-	        item.Save(UserName);
+            item.Save(CategoryName);
+            return item;
 	    }
     }
 }

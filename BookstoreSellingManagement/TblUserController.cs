@@ -80,7 +80,7 @@ namespace Bookstore
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(Guid Id,string UserName,string FirstName,string LastName,string Email,string UserAddress,string UserPassword,DateTime Birthday,string Phone,bool Sex,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate)
+	    public void Insert(Guid Id,string UserName,string FirstName,string LastName,string Email,string UserPassword,DateTime Birthday,string Phone,bool Sex,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate,string UserAddress)
 	    {
 		    TblUser item = new TblUser();
 		    
@@ -93,8 +93,6 @@ namespace Bookstore
             item.LastName = LastName;
             
             item.Email = Email;
-            
-            item.UserAddress = UserAddress;
             
             item.UserPassword = UserPassword;
             
@@ -118,6 +116,8 @@ namespace Bookstore
             
             item.UpdatedDate = UpdatedDate;
             
+            item.UserAddress = UserAddress;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -126,7 +126,7 @@ namespace Bookstore
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(Guid Id,string UserName,string FirstName,string LastName,string Email,string UserAddress,string UserPassword,DateTime Birthday,string Phone,bool Sex,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate)
+	    public void Update(Guid Id,string UserName,string FirstName,string LastName,string Email,string UserPassword,DateTime Birthday,string Phone,bool Sex,bool IsActived,bool IsDeleted,string Avatar,string CreatedUser,DateTime CreatedDate,string UpdatedUser,DateTime UpdatedDate,string UserAddress)
 	    {
 		    TblUser item = new TblUser();
 	        item.MarkOld();
@@ -141,8 +141,6 @@ namespace Bookstore
 			item.LastName = LastName;
 				
 			item.Email = Email;
-				
-			item.UserAddress = UserAddress;
 				
 			item.UserPassword = UserPassword;
 				
@@ -165,6 +163,8 @@ namespace Bookstore
 			item.UpdatedUser = UpdatedUser;
 				
 			item.UpdatedDate = UpdatedDate;
+				
+			item.UserAddress = UserAddress;
 				
 	        item.Save(UserName);
 	    }

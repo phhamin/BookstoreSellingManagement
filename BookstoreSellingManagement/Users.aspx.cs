@@ -14,8 +14,6 @@ namespace BookstoreSellingManagement
 {
     public partial class Users : System.Web.UI.Page
     {
-        //private const string SortDirectionSessionKey = "SortDirection";
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -56,10 +54,11 @@ namespace BookstoreSellingManagement
                 users = users.OrderByDescending(u => u.CreatedDate).ToList();
             }
 
-           
+
             gvUsers.DataSource = users;
             gvUsers.DataBind();
         }
+
 
         private List<TblUser> ApplySortingToUsers(List<TblUser> users, string sortExpression, SortDirection sortDirection)
         {
@@ -81,13 +80,13 @@ namespace BookstoreSellingManagement
         }
 
 
-        protected void btnSaveUser_Click(object sender, EventArgs e)
-        {
-            TblUser objUser = new TblUser();
+        //protected void btnSaveUser_Click(object sender, EventArgs e)
+        //{
+        //    TblUser objUser = new TblUser();
 
-            UsersManager.InsertUser(objUser);
+        //    UsersManager.InsertUser(objUser);
 
-        }
+        //}
         protected void gvUsers_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditUser")
@@ -148,11 +147,6 @@ namespace BookstoreSellingManagement
 
         }
 
-        protected void gvUsers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         protected void gvUsers_Sorting(object sender, GridViewSortEventArgs e)
         {
             string sortExpression = e.SortExpression;
@@ -165,8 +159,6 @@ namespace BookstoreSellingManagement
             // Thực hiện sắp xếp và cập nhật dữ liệu trong GridView
             BindUsers();
         }
-
-
 
         private void ApplySorting(string sortExpression, SortDirection sortDirection)
         {

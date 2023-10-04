@@ -11,17 +11,17 @@ namespace BookstoreSellingManagement
 {
 
 
-    public partial class Category
+    public partial class Publisher
     {
 
         /// <summary>
-        /// gvCategorys control.
+        /// gvPublishers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCategorys;
+        protected global::System.Web.UI.WebControls.GridView gvPublishers;
 
         /// <summary>
         /// liveToast control.

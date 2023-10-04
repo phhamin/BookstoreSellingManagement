@@ -124,6 +124,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AuthorDetail.aspx" />
     <Content Include="Authors.aspx" />
     <Content Include="Books.aspx" />
     <Content Include="Category.aspx" />
@@ -383,6 +384,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
+    <Content Include="CustomerDetail.aspx" />
     <Content Include="Customers.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
@@ -463,7 +465,8 @@
     <Content Include="lib\owlcarousel\owl.carousel.js" />
     <Content Include="lib\owlcarousel\owl.carousel.min.js" />
     <Content Include="Orders.aspx" />
-    <Content Include="Publisher.aspx" />
+    <Content Include="Publishers.aspx" />
+    <Content Include="PublisherDetail.aspx" />
     <Content Include="Reports.aspx" />
     <Content Include="Reviews.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -510,6 +513,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AuthorDetail.aspx.cs">
+      <DependentUpon>AuthorDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuthorDetail.aspx.designer.cs">
+      <DependentUpon>AuthorDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Authors.aspx.cs">
       <DependentUpon>Authors.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -530,6 +540,13 @@
     </Compile>
     <Compile Include="Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDetail.aspx.cs">
+      <DependentUpon>CustomerDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerDetail.aspx.designer.cs">
+      <DependentUpon>CustomerDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Customers.aspx.cs">
       <DependentUpon>Customers.aspx</DependentUpon>
@@ -570,12 +587,19 @@
       <DependentUpon>Orders.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Publisher.aspx.cs">
-      <DependentUpon>Publisher.aspx</DependentUpon>
+    <Compile Include="Publishers.aspx.cs">
+      <DependentUpon>Publishers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Publisher.aspx.designer.cs">
-      <DependentUpon>Publisher.aspx</DependentUpon>
+    <Compile Include="Publishers.aspx.designer.cs">
+      <DependentUpon>Publishers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PublisherDetail.aspx.cs">
+      <DependentUpon>PublisherDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PublisherDetail.aspx.designer.cs">
+      <DependentUpon>PublisherDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>

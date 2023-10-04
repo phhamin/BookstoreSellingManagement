@@ -44,7 +44,7 @@ namespace BLL
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 // Xử lý lỗi nếu cần
                 return false;
