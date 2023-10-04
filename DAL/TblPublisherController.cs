@@ -22,23 +22,23 @@ namespace Bookstore
     {
         // Preload our schema..
         TblPublisher thisSchemaLoad = new TblPublisher();
-        private string userName = String.Empty;
-        protected string UserName
+        private string publisherName = String.Empty;
+        protected string PublisherName
         {
             get
             {
-				if (userName.Length == 0) 
+				if (publisherName.Length == 0) 
 				{
     				if (System.Web.HttpContext.Current != null)
     				{
-						userName=System.Web.HttpContext.Current.User.Identity.Name;
+						publisherName=System.Web.HttpContext.Current.User.Identity.Name;
 					}
 					else
 					{
-						userName=System.Threading.Thread.CurrentPrincipal.Identity.Name;
+						publisherName=System.Threading.Thread.CurrentPrincipal.Identity.Name;
 					}
 				}
-				return userName;
+				return publisherName;
             }
         }
         [DataObjectMethod(DataObjectMethodType.Select, true)]
@@ -80,41 +80,20 @@ namespace Bookstore
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(Guid Id,string PublisherName,string Address,string Phone)
+	    public TblPublisher Insert(TblPublisher item)
 	    {
-		    TblPublisher item = new TblPublisher();
-		    
-            item.Id = Id;
-            
-            item.PublisherName = PublisherName;
-            
-            item.Address = Address;
-            
-            item.Phone = Phone;
-            
-	    
-		    item.Save(UserName);
+            item.Save(PublisherName);
+            return item;
 	    }
     	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(Guid Id,string PublisherName,string Address,string Phone)
+	    public TblPublisher Update(TblPublisher item)
 	    {
-		    TblPublisher item = new TblPublisher();
-	        item.MarkOld();
-	        item.IsLoaded = true;
-		    
-			item.Id = Id;
-				
-			item.PublisherName = PublisherName;
-				
-			item.Address = Address;
-				
-			item.Phone = Phone;
-				
-	        item.Save(UserName);
+            item.Save(PublisherName);
+            return item;
 	    }
     }
 }

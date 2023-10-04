@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace BookstoreSellingManagement
 {
-    public partial class Category : System.Web.UI.Page
+    public partial class Publisher : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,74 +29,74 @@ namespace BookstoreSellingManagement
                 // Kiểm tra và áp dụng thông tin trang hiện tại từ Session
                 if (Session["CurrentPage"] != null)
                 {
-                    gvCategorys.PageIndex = (int)Session["CurrentPage"];
+                    gvPublishers.PageIndex = (int)Session["CurrentPage"];
                 }
 
-                BindCategorys();
+                BindPublishers();
             }
         }
 
 
-        private void BindCategorys()
+        private void BindPublishers()
         {
-            BLL.CategoryManager CategoryManager = new BLL.CategoryManager();
-            List<TblCategory> categorys = CategoryManager.GetListCategory();
+            BLL.PublishersManager PublisherManager = new BLL.PublishersManager();
+            List<TblPublisher> publishers = PublishersManager.GetListPublisher();
 
             if (Session["SortExpression"] != null && Session["SortDirection"] != null)
             {
                 string sortExpression = Session["SortExpression"].ToString();
                 SortDirection sortDirection = (SortDirection)Session["SortDirection"];
-                categorys = ApplySortingToCategorys(categorys, sortExpression, sortDirection);
+                publishers = ApplySortingToPublishers(publishers, sortExpression, sortDirection);
             }
             else
             {
-                categorys = categorys.OrderByDescending(u => u.CategoryName).ToList();
+                publishers = publishers.OrderByDescending(u => u.PublisherName).ToList();
             }
 
 
-            gvCategorys.DataSource = categorys;
-            gvCategorys.DataBind();
+            gvPublishers.DataSource = publishers;
+            gvPublishers.DataBind();
         }
 
 
-        private List<TblCategory> ApplySortingToCategorys(List<TblCategory> categorys, string sortExpression, SortDirection sortDirection)
+        private List<TblPublisher> ApplySortingToPublishers(List<TblPublisher> publishers, string sortExpression, SortDirection sortDirection)
         {
-            PropertyInfo propertyInfo = typeof(TblCategory).GetProperty(sortExpression);
+            PropertyInfo propertyInfo = typeof(TblPublisher).GetProperty(sortExpression);
 
             if (propertyInfo != null)
             {
                 if (sortDirection == SortDirection.Descending)
                 {
-                    categorys = categorys.OrderByDescending(u => propertyInfo.GetValue(u, null)).ToList();
+                    publishers = publishers.OrderByDescending(u => propertyInfo.GetValue(u, null)).ToList();
                 }
                 else
                 {
-                    categorys = categorys.OrderBy(u => propertyInfo.GetValue(u, null)).ToList();
+                    publishers = publishers.OrderBy(u => propertyInfo.GetValue(u, null)).ToList();
                 }
             }
 
-            return categorys;
+            return publishers;
         }
-        protected void gvCategorys_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvPublishers_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "EditCategory")
+            if (e.CommandName == "EditPublisher")
             {
-                string categoryId = e.CommandArgument.ToString();
+                string publisherId = e.CommandArgument.ToString();
 
-                // Chuyển hướng đến trang CategoryDetail.aspx với tham số categoryId để hiển thị chi tiết người dùng và cho chỉnh sửa
-                Response.Redirect("CategoryDetail.aspx?categoryId=" + categoryId);
+                // Chuyển hướng đến trang PublisherDetail.aspx với tham số publisherId để hiển thị chi tiết người dùng và cho chỉnh sửa
+                Response.Redirect("PublisherDetail.aspx?publisherId=" + publisherId);
             }
-            if (e.CommandName == "DeleteCategory")
+            if (e.CommandName == "DeletePublisher")
             {
-                if (Guid.TryParse(e.CommandArgument.ToString(), out Guid categoryId))
+                if (Guid.TryParse(e.CommandArgument.ToString(), out Guid publisherId))
                 {
                     // Gọi hàm xóa người dùng từ BLL bằng SubSonic
-                    bool isDeleted = CategoryManager.DeleteCategory(categoryId);
+                    bool isDeleted = PublishersManager.DeletePublisher(publisherId);
                     if (isDeleted)
                     {
                         liveToast.Attributes["class"] = "toast show";
-                        BindCategorys();
-                        //Response.Redirect("Categorys.aspx");
+                        BindPublishers();
+                        //Response.Redirect("Publishers.aspx");
 
                     }
                     else
@@ -108,7 +108,7 @@ namespace BookstoreSellingManagement
             }
         }
 
-        protected void gvCategorys_Sorting(object sender, GridViewSortEventArgs e)
+        protected void gvPublishers_Sorting(object sender, GridViewSortEventArgs e)
         {
             string sortExpression = e.SortExpression;
             SortDirection sortDirection = GetSortDirection(sortExpression);
@@ -118,21 +118,21 @@ namespace BookstoreSellingManagement
             Session["SortDirection"] = sortDirection;
 
             // Thực hiện sắp xếp và cập nhật dữ liệu trong GridView
-            BindCategorys();
+            BindPublishers();
         }
 
         private void ApplySorting(string sortExpression, SortDirection sortDirection)
         {
-            SqlQuery sortedQuery = GetSortedCategoryQuery(sortExpression, sortDirection);
-            List<TblCategory> categorys = sortedQuery.ExecuteTypedList<TblCategory>();
-            gvCategorys.DataSource = categorys;
-            gvCategorys.DataBind();
+            SqlQuery sortedQuery = GetSortedPublisherQuery(sortExpression, sortDirection);
+            List<TblPublisher> publishers = sortedQuery.ExecuteTypedList<TblPublisher>();
+            gvPublishers.DataSource = publishers;
+            gvPublishers.DataBind();
         }
 
 
-        private SqlQuery GetSortedCategoryQuery(string sortExpression, SortDirection sortDirection)
+        private SqlQuery GetSortedPublisherQuery(string sortExpression, SortDirection sortDirection)
         {
-            SqlQuery query = new Select().From<TblCategory>();
+            SqlQuery query = new Select().From<TblPublisher>();
 
             if (sortDirection == SortDirection.Descending)
             {
@@ -171,17 +171,17 @@ namespace BookstoreSellingManagement
             return (SortDirection)Session["SortDirection"];
         }
 
-        protected void gvCategorys_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvPublishers_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            if (e.NewPageIndex != gvCategorys.PageIndex)
+            if (e.NewPageIndex != gvPublishers.PageIndex)
             {
                 // Trang hiện tại đã thay đổi, lưu trang mới vào Ses sion
-                gvCategorys.PageIndex = e.NewPageIndex;
+                gvPublishers.PageIndex = e.NewPageIndex;
 
                 Session["pageNumber"] = e.NewPageIndex;
 
-                // Gọi lại hàm BindCategorys để hiển thị trang mới
-                BindCategorys();
+                // Gọi lại hàm BindPublishers để hiển thị trang mới
+                BindPublishers();
             }
         }
     }

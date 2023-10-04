@@ -22,23 +22,23 @@ namespace Bookstore
     {
         // Preload our schema..
         TblAuthor thisSchemaLoad = new TblAuthor();
-        private string userName = String.Empty;
-        protected string UserName
+        private string authorName = String.Empty;
+        protected string AuthorName
         {
             get
             {
-				if (userName.Length == 0) 
+				if (authorName.Length == 0) 
 				{
     				if (System.Web.HttpContext.Current != null)
     				{
-						userName=System.Web.HttpContext.Current.User.Identity.Name;
+						authorName=System.Web.HttpContext.Current.User.Identity.Name;
 					}
 					else
 					{
-						userName=System.Threading.Thread.CurrentPrincipal.Identity.Name;
+						authorName=System.Threading.Thread.CurrentPrincipal.Identity.Name;
 					}
 				}
-				return userName;
+				return authorName;
             }
         }
         [DataObjectMethod(DataObjectMethodType.Select, true)]
@@ -80,45 +80,25 @@ namespace Bookstore
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(Guid Id,string AuthorName,string Address,string Biography,string Phone)
+	    public TblAuthor Insert(TblAuthor item)
 	    {
-		    TblAuthor item = new TblAuthor();
-		    
-            item.Id = Id;
-            
-            item.AuthorName = AuthorName;
-            
-            item.Address = Address;
-            
-            item.Biography = Biography;
-            
-            item.Phone = Phone;
-            
-	    
-		    item.Save(UserName);
-	    }
+            item.Save(AuthorName);
+            return item;
+        }
     	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(Guid Id,string AuthorName,string Address,string Biography,string Phone)
+	    public TblAuthor Update(TblAuthor item)
 	    {
-		    TblAuthor item = new TblAuthor();
-	        item.MarkOld();
-	        item.IsLoaded = true;
-		    
-			item.Id = Id;
-				
-			item.AuthorName = AuthorName;
-				
-			item.Address = Address;
-				
-			item.Biography = Biography;
-				
-			item.Phone = Phone;
-				
-	        item.Save(UserName);
-	    }
+            item.Save(AuthorName);
+            return item;
+        }
+
+        //public TblAuthor Insert(TblAuthor item)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

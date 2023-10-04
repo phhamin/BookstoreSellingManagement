@@ -11,7 +11,7 @@ namespace BookstoreSellingManagement
 {
 
 
-    public partial class UserDetail
+    public partial class CustomerDetail
     {
 
         /// <summary>
@@ -78,40 +78,22 @@ namespace BookstoreSellingManagement
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl iValidPassword;
 
         /// <summary>
-        /// txtFirstName control.
+        /// txtFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
+        protected global::System.Web.UI.WebControls.TextBox txtFullName;
 
         /// <summary>
-        /// iValidFirstName control.
+        /// iValidFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl iValidFirstName;
-
-        /// <summary>
-        /// txtLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLastName;
-
-        /// <summary>
-        /// iValidLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl iValidLastName;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl iValidFullName;
 
         /// <summary>
         /// drdSex control.

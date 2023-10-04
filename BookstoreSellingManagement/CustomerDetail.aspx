@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="UserDetail.aspx.cs" Inherits="BookstoreSellingManagement.UserDetail" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="CustomerDetail.aspx.cs" Inherits="BookstoreSellingManagement.CustomerDetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="phCss" runat="server">
     <link href="cms/admin/assets/css/admin.style.css" rel="stylesheet" />
 </asp:Content>
@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">User Detail</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Customer Detail</h4>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                                 <asp:UpdatePanel ID="panel" runat="server">
                                                     <ContentTemplate>
                                                         <div class="mb-3">
-                                                            <label for="user-name-input" class="form-label">User Name</label>
+                                                            <label for="customer-name-input" class="form-label">User Name</label>
                                                             <asp:TextBox ID="txtUserName" class="form-control" runat="server" placeholder="Enter User Name" ></asp:TextBox>
                                                             <i runat="server" class="input-notify" id="iValidUserName" visible="false" >Please enter User Name!</i>
                                                         </div>              
@@ -48,16 +48,11 @@
                                                             <label for="password-input" class="form-label">Password</label>
                                                             <asp:TextBox ID="txtPassword" class="form-control" runat="server" TextMode="Password" placeholder="Enter Password"></asp:TextBox>
                                                             <i runat="server" class="input-notify" id="iValidPassword" visible="false">Please enter Password!</i>
-                                                        </div>  
+                                                        </div>                                                  
                                                         <div class="mb-3">
-                                                            <label for="firstname-input" class="form-label">First Name</label>
-                                                            <asp:TextBox ID="txtFirstName" class="form-control" runat="server" placeholder="Enter First Name"></asp:TextBox>
-                                                            <i runat="server" class="input-notify"  id="iValidFirstName" visible="false">Please enter First Name!</i>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="lastname-input" class="form-label">Last Name</label>
-                                                            <asp:TextBox ID="txtLastName" class="form-control" runat="server" placeholder="Enter Last Name"></asp:TextBox>
-                                                            <i runat="server" class="input-notify" id="iValidLastName" visible="false">Please enter Last Name!</i>
+                                                            <label for="fullname-input" class="form-label">Full Name</label>
+                                                            <asp:TextBox ID="txtFullName" class="form-control" runat="server" placeholder="Enter Full Name"></asp:TextBox>
+                                                            <i runat="server" class="input-notify" id="iValidFullName" visible="false">Please enter Full Name!</i>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label">Sex</label>
@@ -112,7 +107,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="toast-body text-success">
-                                        User has been created successfully.
+                                        Customer has been created successfully.
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +124,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="toast-body text-success">
-                                        User has been updated successfully.
+                                        Customer has been updated successfully.
                                     </div>
                                 </div>
                             </div>

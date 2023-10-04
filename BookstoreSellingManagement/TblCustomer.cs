@@ -182,20 +182,6 @@ namespace Bookstore
 				colvarEmail.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarEmail);
 				
-				TableSchema.TableColumn colvarCustomerAddress = new TableSchema.TableColumn(schema);
-				colvarCustomerAddress.ColumnName = "CustomerAddress";
-				colvarCustomerAddress.DataType = DbType.String;
-				colvarCustomerAddress.MaxLength = 1073741823;
-				colvarCustomerAddress.AutoIncrement = false;
-				colvarCustomerAddress.IsNullable = false;
-				colvarCustomerAddress.IsPrimaryKey = false;
-				colvarCustomerAddress.IsForeignKey = false;
-				colvarCustomerAddress.IsReadOnly = false;
-				
-						colvarCustomerAddress.DefaultSetting = @"('')";
-				colvarCustomerAddress.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarCustomerAddress);
-				
 				TableSchema.TableColumn colvarPhone = new TableSchema.TableColumn(schema);
 				colvarPhone.ColumnName = "Phone";
 				colvarPhone.DataType = DbType.AnsiString;
@@ -364,6 +350,20 @@ namespace Bookstore
 				colvarUpdatedDate.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarUpdatedDate);
 				
+				TableSchema.TableColumn colvarCustomerAddress = new TableSchema.TableColumn(schema);
+				colvarCustomerAddress.ColumnName = "CustomerAddress";
+				colvarCustomerAddress.DataType = DbType.String;
+				colvarCustomerAddress.MaxLength = 500;
+				colvarCustomerAddress.AutoIncrement = false;
+				colvarCustomerAddress.IsNullable = false;
+				colvarCustomerAddress.IsPrimaryKey = false;
+				colvarCustomerAddress.IsForeignKey = false;
+				colvarCustomerAddress.IsReadOnly = false;
+				
+						colvarCustomerAddress.DefaultSetting = @"('')";
+				colvarCustomerAddress.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarCustomerAddress);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -404,14 +404,6 @@ namespace Bookstore
 		{
 			get { return GetColumnValue<string>(Columns.Email); }
 			set { SetColumnValue(Columns.Email, value); }
-		}
-		  
-		[XmlAttribute("CustomerAddress")]
-		[Bindable(true)]
-		public string CustomerAddress 
-		{
-			get { return GetColumnValue<string>(Columns.CustomerAddress); }
-			set { SetColumnValue(Columns.CustomerAddress, value); }
 		}
 		  
 		[XmlAttribute("Phone")]
@@ -509,6 +501,14 @@ namespace Bookstore
 			get { return GetColumnValue<DateTime>(Columns.UpdatedDate); }
 			set { SetColumnValue(Columns.UpdatedDate, value); }
 		}
+		  
+		[XmlAttribute("CustomerAddress")]
+		[Bindable(true)]
+		public string CustomerAddress 
+		{
+			get { return GetColumnValue<string>(Columns.CustomerAddress); }
+			set { SetColumnValue(Columns.CustomerAddress, value); }
+		}
 		
 		#endregion
 		
@@ -529,7 +529,7 @@ namespace Bookstore
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(Guid varId,Guid? varCode,string varFullName,string varEmail,string varCustomerAddress,string varPhone,bool varSex,DateTime varBirthday,string varUserName,string varCustomerPassword,bool varIsActived,bool varIsDeleted,string varAvatar,string varCreatedUser,DateTime varCreatedDate,string varUpdatedUser,DateTime varUpdatedDate)
+		public static void Insert(Guid varId,Guid? varCode,string varFullName,string varEmail,string varPhone,bool varSex,DateTime varBirthday,string varUserName,string varCustomerPassword,bool varIsActived,bool varIsDeleted,string varAvatar,string varCreatedUser,DateTime varCreatedDate,string varUpdatedUser,DateTime varUpdatedDate,string varCustomerAddress)
 		{
 			TblCustomer item = new TblCustomer();
 			
@@ -540,8 +540,6 @@ namespace Bookstore
 			item.FullName = varFullName;
 			
 			item.Email = varEmail;
-			
-			item.CustomerAddress = varCustomerAddress;
 			
 			item.Phone = varPhone;
 			
@@ -567,6 +565,8 @@ namespace Bookstore
 			
 			item.UpdatedDate = varUpdatedDate;
 			
+			item.CustomerAddress = varCustomerAddress;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -577,7 +577,7 @@ namespace Bookstore
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(Guid varId,Guid? varCode,string varFullName,string varEmail,string varCustomerAddress,string varPhone,bool varSex,DateTime varBirthday,string varUserName,string varCustomerPassword,bool varIsActived,bool varIsDeleted,string varAvatar,string varCreatedUser,DateTime varCreatedDate,string varUpdatedUser,DateTime varUpdatedDate)
+		public static void Update(Guid varId,Guid? varCode,string varFullName,string varEmail,string varPhone,bool varSex,DateTime varBirthday,string varUserName,string varCustomerPassword,bool varIsActived,bool varIsDeleted,string varAvatar,string varCreatedUser,DateTime varCreatedDate,string varUpdatedUser,DateTime varUpdatedDate,string varCustomerAddress)
 		{
 			TblCustomer item = new TblCustomer();
 			
@@ -588,8 +588,6 @@ namespace Bookstore
 				item.FullName = varFullName;
 			
 				item.Email = varEmail;
-			
-				item.CustomerAddress = varCustomerAddress;
 			
 				item.Phone = varPhone;
 			
@@ -614,6 +612,8 @@ namespace Bookstore
 				item.UpdatedUser = varUpdatedUser;
 			
 				item.UpdatedDate = varUpdatedDate;
+			
+				item.CustomerAddress = varCustomerAddress;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -656,91 +656,91 @@ namespace Bookstore
         
         
         
-        public static TableSchema.TableColumn CustomerAddressColumn
+        public static TableSchema.TableColumn PhoneColumn
         {
             get { return Schema.Columns[4]; }
         }
         
         
         
-        public static TableSchema.TableColumn PhoneColumn
+        public static TableSchema.TableColumn SexColumn
         {
             get { return Schema.Columns[5]; }
         }
         
         
         
-        public static TableSchema.TableColumn SexColumn
+        public static TableSchema.TableColumn BirthdayColumn
         {
             get { return Schema.Columns[6]; }
         }
         
         
         
-        public static TableSchema.TableColumn BirthdayColumn
+        public static TableSchema.TableColumn UserNameColumn
         {
             get { return Schema.Columns[7]; }
         }
         
         
         
-        public static TableSchema.TableColumn UserNameColumn
+        public static TableSchema.TableColumn CustomerPasswordColumn
         {
             get { return Schema.Columns[8]; }
         }
         
         
         
-        public static TableSchema.TableColumn CustomerPasswordColumn
+        public static TableSchema.TableColumn IsActivedColumn
         {
             get { return Schema.Columns[9]; }
         }
         
         
         
-        public static TableSchema.TableColumn IsActivedColumn
+        public static TableSchema.TableColumn IsDeletedColumn
         {
             get { return Schema.Columns[10]; }
         }
         
         
         
-        public static TableSchema.TableColumn IsDeletedColumn
+        public static TableSchema.TableColumn AvatarColumn
         {
             get { return Schema.Columns[11]; }
         }
         
         
         
-        public static TableSchema.TableColumn AvatarColumn
+        public static TableSchema.TableColumn CreatedUserColumn
         {
             get { return Schema.Columns[12]; }
         }
         
         
         
-        public static TableSchema.TableColumn CreatedUserColumn
+        public static TableSchema.TableColumn CreatedDateColumn
         {
             get { return Schema.Columns[13]; }
         }
         
         
         
-        public static TableSchema.TableColumn CreatedDateColumn
+        public static TableSchema.TableColumn UpdatedUserColumn
         {
             get { return Schema.Columns[14]; }
         }
         
         
         
-        public static TableSchema.TableColumn UpdatedUserColumn
+        public static TableSchema.TableColumn UpdatedDateColumn
         {
             get { return Schema.Columns[15]; }
         }
         
         
         
-        public static TableSchema.TableColumn UpdatedDateColumn
+        public static TableSchema.TableColumn CustomerAddressColumn
         {
             get { return Schema.Columns[16]; }
         }
@@ -755,7 +755,6 @@ namespace Bookstore
 			 public static string Code = @"Code";
 			 public static string FullName = @"FullName";
 			 public static string Email = @"Email";
-			 public static string CustomerAddress = @"CustomerAddress";
 			 public static string Phone = @"Phone";
 			 public static string Sex = @"Sex";
 			 public static string Birthday = @"Birthday";
@@ -768,6 +767,7 @@ namespace Bookstore
 			 public static string CreatedDate = @"CreatedDate";
 			 public static string UpdatedUser = @"UpdatedUser";
 			 public static string UpdatedDate = @"UpdatedDate";
+			 public static string CustomerAddress = @"CustomerAddress";
 						
 		}
 		#endregion

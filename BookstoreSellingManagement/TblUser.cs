@@ -196,20 +196,6 @@ namespace Bookstore
 				colvarEmail.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarEmail);
 				
-				TableSchema.TableColumn colvarUserAddress = new TableSchema.TableColumn(schema);
-				colvarUserAddress.ColumnName = "UserAddress";
-				colvarUserAddress.DataType = DbType.String;
-				colvarUserAddress.MaxLength = 1073741823;
-				colvarUserAddress.AutoIncrement = false;
-				colvarUserAddress.IsNullable = false;
-				colvarUserAddress.IsPrimaryKey = false;
-				colvarUserAddress.IsForeignKey = false;
-				colvarUserAddress.IsReadOnly = false;
-				
-						colvarUserAddress.DefaultSetting = @"('')";
-				colvarUserAddress.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarUserAddress);
-				
 				TableSchema.TableColumn colvarUserPassword = new TableSchema.TableColumn(schema);
 				colvarUserPassword.ColumnName = "UserPassword";
 				colvarUserPassword.DataType = DbType.AnsiString;
@@ -364,6 +350,20 @@ namespace Bookstore
 				colvarUpdatedDate.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarUpdatedDate);
 				
+				TableSchema.TableColumn colvarUserAddress = new TableSchema.TableColumn(schema);
+				colvarUserAddress.ColumnName = "UserAddress";
+				colvarUserAddress.DataType = DbType.String;
+				colvarUserAddress.MaxLength = 500;
+				colvarUserAddress.AutoIncrement = false;
+				colvarUserAddress.IsNullable = false;
+				colvarUserAddress.IsPrimaryKey = false;
+				colvarUserAddress.IsForeignKey = false;
+				colvarUserAddress.IsReadOnly = false;
+				
+						colvarUserAddress.DefaultSetting = @"('')";
+				colvarUserAddress.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarUserAddress);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -412,14 +412,6 @@ namespace Bookstore
 		{
 			get { return GetColumnValue<string>(Columns.Email); }
 			set { SetColumnValue(Columns.Email, value); }
-		}
-		  
-		[XmlAttribute("UserAddress")]
-		[Bindable(true)]
-		public string UserAddress 
-		{
-			get { return GetColumnValue<string>(Columns.UserAddress); }
-			set { SetColumnValue(Columns.UserAddress, value); }
 		}
 		  
 		[XmlAttribute("UserPassword")]
@@ -509,6 +501,14 @@ namespace Bookstore
 			get { return GetColumnValue<DateTime>(Columns.UpdatedDate); }
 			set { SetColumnValue(Columns.UpdatedDate, value); }
 		}
+		  
+		[XmlAttribute("UserAddress")]
+		[Bindable(true)]
+		public string UserAddress 
+		{
+			get { return GetColumnValue<string>(Columns.UserAddress); }
+			set { SetColumnValue(Columns.UserAddress, value); }
+		}
 		
 		#endregion
 		
@@ -529,7 +529,7 @@ namespace Bookstore
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(Guid varId,string varUserName,string varFirstName,string varLastName,string varEmail,string varUserAddress,string varUserPassword,DateTime varBirthday,string varPhone,bool varSex,bool varIsActived,bool varIsDeleted,string varAvatar,string varCreatedUser,DateTime varCreatedDate,string varUpdatedUser,DateTime varUpdatedDate)
+		public static void Insert(Guid varId,string varUserName,string varFirstName,string varLastName,string varEmail,string varUserPassword,DateTime varBirthday,string varPhone,bool varSex,bool varIsActived,bool varIsDeleted,string varAvatar,string varCreatedUser,DateTime varCreatedDate,string varUpdatedUser,DateTime varUpdatedDate,string varUserAddress)
 		{
 			TblUser item = new TblUser();
 			
@@ -542,8 +542,6 @@ namespace Bookstore
 			item.LastName = varLastName;
 			
 			item.Email = varEmail;
-			
-			item.UserAddress = varUserAddress;
 			
 			item.UserPassword = varUserPassword;
 			
@@ -567,6 +565,8 @@ namespace Bookstore
 			
 			item.UpdatedDate = varUpdatedDate;
 			
+			item.UserAddress = varUserAddress;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -577,7 +577,7 @@ namespace Bookstore
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(Guid varId,string varUserName,string varFirstName,string varLastName,string varEmail,string varUserAddress,string varUserPassword,DateTime varBirthday,string varPhone,bool varSex,bool varIsActived,bool varIsDeleted,string varAvatar,string varCreatedUser,DateTime varCreatedDate,string varUpdatedUser,DateTime varUpdatedDate)
+		public static void Update(Guid varId,string varUserName,string varFirstName,string varLastName,string varEmail,string varUserPassword,DateTime varBirthday,string varPhone,bool varSex,bool varIsActived,bool varIsDeleted,string varAvatar,string varCreatedUser,DateTime varCreatedDate,string varUpdatedUser,DateTime varUpdatedDate,string varUserAddress)
 		{
 			TblUser item = new TblUser();
 			
@@ -590,8 +590,6 @@ namespace Bookstore
 				item.LastName = varLastName;
 			
 				item.Email = varEmail;
-			
-				item.UserAddress = varUserAddress;
 			
 				item.UserPassword = varUserPassword;
 			
@@ -614,6 +612,8 @@ namespace Bookstore
 				item.UpdatedUser = varUpdatedUser;
 			
 				item.UpdatedDate = varUpdatedDate;
+			
+				item.UserAddress = varUserAddress;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -663,84 +663,84 @@ namespace Bookstore
         
         
         
-        public static TableSchema.TableColumn UserAddressColumn
+        public static TableSchema.TableColumn UserPasswordColumn
         {
             get { return Schema.Columns[5]; }
         }
         
         
         
-        public static TableSchema.TableColumn UserPasswordColumn
+        public static TableSchema.TableColumn BirthdayColumn
         {
             get { return Schema.Columns[6]; }
         }
         
         
         
-        public static TableSchema.TableColumn BirthdayColumn
+        public static TableSchema.TableColumn PhoneColumn
         {
             get { return Schema.Columns[7]; }
         }
         
         
         
-        public static TableSchema.TableColumn PhoneColumn
+        public static TableSchema.TableColumn SexColumn
         {
             get { return Schema.Columns[8]; }
         }
         
         
         
-        public static TableSchema.TableColumn SexColumn
+        public static TableSchema.TableColumn IsActivedColumn
         {
             get { return Schema.Columns[9]; }
         }
         
         
         
-        public static TableSchema.TableColumn IsActivedColumn
+        public static TableSchema.TableColumn IsDeletedColumn
         {
             get { return Schema.Columns[10]; }
         }
         
         
         
-        public static TableSchema.TableColumn IsDeletedColumn
+        public static TableSchema.TableColumn AvatarColumn
         {
             get { return Schema.Columns[11]; }
         }
         
         
         
-        public static TableSchema.TableColumn AvatarColumn
+        public static TableSchema.TableColumn CreatedUserColumn
         {
             get { return Schema.Columns[12]; }
         }
         
         
         
-        public static TableSchema.TableColumn CreatedUserColumn
+        public static TableSchema.TableColumn CreatedDateColumn
         {
             get { return Schema.Columns[13]; }
         }
         
         
         
-        public static TableSchema.TableColumn CreatedDateColumn
+        public static TableSchema.TableColumn UpdatedUserColumn
         {
             get { return Schema.Columns[14]; }
         }
         
         
         
-        public static TableSchema.TableColumn UpdatedUserColumn
+        public static TableSchema.TableColumn UpdatedDateColumn
         {
             get { return Schema.Columns[15]; }
         }
         
         
         
-        public static TableSchema.TableColumn UpdatedDateColumn
+        public static TableSchema.TableColumn UserAddressColumn
         {
             get { return Schema.Columns[16]; }
         }
@@ -756,7 +756,6 @@ namespace Bookstore
 			 public static string FirstName = @"FirstName";
 			 public static string LastName = @"LastName";
 			 public static string Email = @"Email";
-			 public static string UserAddress = @"UserAddress";
 			 public static string UserPassword = @"UserPassword";
 			 public static string Birthday = @"Birthday";
 			 public static string Phone = @"Phone";
@@ -768,6 +767,7 @@ namespace Bookstore
 			 public static string CreatedDate = @"CreatedDate";
 			 public static string UpdatedUser = @"UpdatedUser";
 			 public static string UpdatedDate = @"UpdatedDate";
+			 public static string UserAddress = @"UserAddress";
 						
 		}
 		#endregion
