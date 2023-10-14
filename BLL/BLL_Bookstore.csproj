@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorsManager.cs" />
+    <Compile Include="BooksManager.cs" />
     <Compile Include="CategoryManager.cs" />
     <Compile Include="CustomersManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

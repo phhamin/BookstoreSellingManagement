@@ -1,4 +1,4 @@
-﻿.avatar-container {
+﻿.avatar-container,{
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -16,5 +16,9 @@
 .input-notify {
     color: rgb(217, 4, 41);
     font-size: smaller;
+}
+.book-preview {
+    max-width: 100%;
+    max-height: 20%;
 }
 

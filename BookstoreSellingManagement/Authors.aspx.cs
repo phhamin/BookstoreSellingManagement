@@ -13,6 +13,9 @@ namespace BookstoreSellingManagement
 {
     public partial class Authors : System.Web.UI.Page
     {
+        public static string FunctionPage = "Books";
+        private static string ssSortExpression = "SortExpression" + FunctionPage;
+        private static string ssSortDirection = "SortDirection" + FunctionPage;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

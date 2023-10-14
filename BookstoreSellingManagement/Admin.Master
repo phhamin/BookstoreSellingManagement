@@ -218,7 +218,7 @@
                             <li>
                                 <a href="Orders.aspx">
                                     <i data-feather="orders"></i>
-                                    <span data-key="t-orders">Oders</span>
+                                    <span data-key="t-orders">Orders</span>
                                 </a>
                             </li>
 

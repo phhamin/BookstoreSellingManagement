@@ -22,23 +22,23 @@ namespace Bookstore
     {
         // Preload our schema..
         TblBook thisSchemaLoad = new TblBook();
-        private string userName = String.Empty;
-        protected string UserName
+        private string bookTitle = String.Empty;
+        protected string BookTitle
         {
             get
             {
-				if (userName.Length == 0) 
+				if (bookTitle.Length == 0) 
 				{
     				if (System.Web.HttpContext.Current != null)
     				{
-						userName=System.Web.HttpContext.Current.User.Identity.Name;
+						bookTitle=System.Web.HttpContext.Current.User.Identity.Name;
 					}
 					else
 					{
-						userName=System.Threading.Thread.CurrentPrincipal.Identity.Name;
+						bookTitle=System.Threading.Thread.CurrentPrincipal.Identity.Name;
 					}
 				}
-				return userName;
+				return bookTitle;
             }
         }
         [DataObjectMethod(DataObjectMethodType.Select, true)]
@@ -80,77 +80,20 @@ namespace Bookstore
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(Guid Id,Guid? Code,string BookTitle,decimal Price,string BookDescription,string BookImage,bool IsActived,bool IsDeleted,DateTime CreatedDate,string CreatedUser,string UpdatedUser,DateTime UpdatedDate,int Quantity)
+	    public TblBook Insert(TblBook item)
 	    {
-		    TblBook item = new TblBook();
-		    
-            item.Id = Id;
-            
-            item.Code = Code;
-            
-            item.BookTitle = BookTitle;
-            
-            item.Price = Price;
-            
-            item.BookDescription = BookDescription;
-            
-            item.BookImage = BookImage;
-            
-            item.IsActived = IsActived;
-            
-            item.IsDeleted = IsDeleted;
-            
-            item.CreatedDate = CreatedDate;
-            
-            item.CreatedUser = CreatedUser;
-            
-            item.UpdatedUser = UpdatedUser;
-            
-            item.UpdatedDate = UpdatedDate;
-            
-            item.Quantity = Quantity;
-            
-	    
-		    item.Save(UserName);
+			item.Save(BookTitle);
+			return item;
 	    }
     	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(Guid Id,Guid? Code,string BookTitle,decimal Price,string BookDescription,string BookImage,bool IsActived,bool IsDeleted,DateTime CreatedDate,string CreatedUser,string UpdatedUser,DateTime UpdatedDate,int Quantity)
+	    public TblBook Update(TblBook item)
 	    {
-		    TblBook item = new TblBook();
-	        item.MarkOld();
-	        item.IsLoaded = true;
-		    
-			item.Id = Id;
-				
-			item.Code = Code;
-				
-			item.BookTitle = BookTitle;
-				
-			item.Price = Price;
-				
-			item.BookDescription = BookDescription;
-				
-			item.BookImage = BookImage;
-				
-			item.IsActived = IsActived;
-				
-			item.IsDeleted = IsDeleted;
-				
-			item.CreatedDate = CreatedDate;
-				
-			item.CreatedUser = CreatedUser;
-				
-			item.UpdatedUser = UpdatedUser;
-				
-			item.UpdatedDate = UpdatedDate;
-				
-			item.Quantity = Quantity;
-				
-	        item.Save(UserName);
+            item.Save(BookTitle);
+            return item;
 	    }
     }
 }
